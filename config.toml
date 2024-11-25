@@ -35,7 +35,7 @@ author = "JGrabala"
 display_author = true
 
 favicon = "favicon.ico"
-image = "avatar-sm.png"
+image = "avatar-sm.jpg"
 
 default_theme = "light"
 list_pages = false
