@@ -2,11 +2,10 @@
 title = "About Me"
 [extra]
   toc = false
-  image = "avatar-sm.png"
+  image = "/avatar-sm.png"
 +++
 
-{{ img(id="avatar-sm.png", alt="my_avatar", class="Center") }}
-
+{{ img(id="/avatar-sm.png", alt="my_avatar", class="Center") }}
 
 ### Bio
 As a seasoned Python developer, my journey began in the field service engineering sector, where I honed my problem-solving skills across various industries. Transitioning into software development, I’ve leveraged my domain expertise to craft full-stack applications that are both robust and user-friendly. My proficiency extends to integrating cloud services such as Google Cloud, Microsoft Azure, and Cloudflare, ensuring scalable and secure solutions. I excel in automating processes using Python, streamlining operations, and enhancing efficiency. My database management capabilities encompass PostgreSQL and MySQL, allowing me to handle data with precision. I’m eager to bring my diverse skill set to a dynamic, technology-driven organization where I can contribute to impactful projects and drive innovation.
