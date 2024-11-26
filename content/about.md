@@ -2,10 +2,10 @@
 title = "About Me"
 [extra]
   toc = false
-  image = "avatar-sm.png"
+  image = "/avatar-sm.png"
 +++
 
-{{ img(id="avatar-sm.png", alt="my_avatar", class="Center") }}
+{{ img(id="/avatar-sm.png", alt="my_avatar", class="Center") }}
 
 
 ### Bio
