@@ -1,0 +1,78 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="IE=edge" http-equiv=X-UA-Compatible><meta content="text/html; charset=UTF-8" http-equiv=content-type><meta content="width=device-width,initial-scale=1,user-scalable=no" name=viewport><meta content="index, follow" name=robots><title>Portfolio projects- part 1 - Django Fleet Management System</title><meta content="Portfolio projects- part 1 - Django Fleet Management System" name=title><meta content=JGrabala name=author><meta content="Current state of the fleet management django project" name=description><meta content=website property=og:type><meta content=https://jgitsol.github.io/blog/portfolio-projects-part1/ property=og:url><meta content="Jedrzej Grabala's personal website" property=og:site_name><meta content="Portfolio projects- part 1 - Django Fleet Management System" property=og:title><meta content="Current state of the fleet management django project" property=og:description><meta content=https://jgitsol.github.io/favicon.ico property=og:image><meta content=summary_large_image property=twitter:card><meta content=https://jgitsol.github.io/blog/portfolio-projects-part1/ property=twitter:url><meta content="Portfolio projects- part 1 - Django Fleet Management System" property=twitter:title><meta content="Current state of the fleet management django project" property=twitter:description><meta content=https://jgitsol.github.io/favicon.ico property=twitter:image><link href=https://jgitsol.github.io/blog/portfolio-projects-part1/ rel=canonical><link rel="shortcut icon" href=https://jgitsol.github.io/favicon.ico type=image/x-icon><link href=https://jgitsol.github.io/atom.xml rel=alternate title=RSS type=application/atom+xml><link href=https://speyll.github.io/suCSS/reset-min.css rel=stylesheet><link href=https://speyll.github.io/suCSS/suCSS-min.css rel=stylesheet><link href=https://jgitsol.github.io/css/style.css rel=stylesheet><script defer src=https://jgitsol.github.io/js/script.js></script><body><header><nav id=nav-bar><a href=/timeline> /timeline/ </a><a href=/> /home/ </a><a href=/about> /about/ </a><a href=/projects> /projects/ </a><a href=/blog> /blog/ </a><div><input id=theme-toggle style=display:none type=checkbox><label for=theme-toggle id=theme-toggle-label><svg class=icons id=theme-icon><use href=https://jgitsol.github.io/icons.svg#lightMode></use></svg></label><audio id=theme-sound><source src=https://jgitsol.github.io/click.ogg type=audio/ogg></audio></div></nav></header><main><div><a href=..>..</a>/<span class=accent-data>portfolio-projects-part1</span></div><time datetime=2024-05-23>Published on: <span class=accent-data>2024-05-23</span></time><address rel=author>By <span class=accent-data>JGrabala</span></address><h1>Portfolio projects- part 1 - Django Fleet Management System</h1><h1 id=current-state-of-the-fleet-management-django-project>Current State of the Fleet Management Django Project</h1><h2 id=project-overview>Project Overview</h2><p>The Car Fleet Management project is a Django-based web application designed to manage vehicle fleets, maintenance schedules, drivers, and emergency incidents. The project uses Django REST Framework for API endpoints and JWT authentication for secure access.<h2 id=project-structure>Project Structure</h2><p>The project is organized into the following main apps:<pre class=language-text data-lang=text style=color:#fdf4c1aa;background-color:#282828><code class=language-text data-lang=text><span>1. accounts: User management and authentication
+</span><span>   - CustomUser model with role-based permissions
+</span><span>   - Driver management
+</span><span>   - Emergency contact information
+</span><span>
+</span><span>2. vehicles: Vehicle management and tracking
+</span><span>   - Vehicle registration and details
+</span><span>   - Status tracking (available, in use, maintenance, out of service)
+</span><span>   - Assignment to drivers
+</span><span>
+</span><span>3. maintenance: Maintenance records and scheduling
+</span><span>   - Maintenance types (routine, repair, inspection)
+</span><span>   - Status tracking (scheduled, in progress, completed, cancelled)
+</span><span>   - Cost tracking and service provider information
+</span><span>
+</span><span>4. emergency: Emergency incident reporting and management
+</span><span>   - Incident types (accident, breakdown, medical, theft)
+</span><span>   - Status tracking (reported, responding, resolved, closed)
+</span><span>   - Emergency response coordination
+</span><span>
+</span><span>5. api: REST API endpoints for the application
+</span><span>   - JWT authentication
+</span><span>   - Endpoints for all main entities
+</span><span>   - Mobile app integration via Lynx JS client
+</span><span>   - AI-powered screenshot analysis using OpenRouter
+</span></code></pre><h2 id=current-test-coverage>Current Test Coverage</h2><p>The project has improved test coverage from 17% to 56%, with:<pre class=language-text data-lang=text style=color:#fdf4c1aa;background-color:#282828><code class=language-text data-lang=text><span>- Models have excellent coverage (nearly 100%)
+</span><span>- Views and API functionality have improved significantly but still have gaps
+</span><span>- Some tests are skipped or failing due to authentication and configuration issues
+</span></code></pre><h2 id=authentication-issues>Authentication Issues</h2><p>The main issues causing test failures are related to authentication:<pre class=language-text data-lang=text style=color:#fdf4c1aa;background-color:#282828><code class=language-text data-lang=text><span>1. JWT Configuration: Uses djangorestframework-simplejwt but tests use force_authenticate
+</span><span>2. Permission Classes: Restrictive permissions without proper test setup
+</span><span>3. Test Authentication: Clients not configured for JWT tokens
+</span><span>4. Patch System: Inconsistent application of authentication patches
+</span></code></pre><h2 id=missing-dependencies>Missing Dependencies</h2><pre class=language-text data-lang=text style=color:#fdf4c1aa;background-color:#282828><code class=language-text data-lang=text><span>1. djangorestframework-simplejwt
+</span><span>2. drf-spectacular
+</span><span>3. REST framework test utilities
+</span><span>4. django-filter
+</span></code></pre><h2 id=api-endpoints>API Endpoints</h2><p>The API provides endpoints for:<pre class=language-text data-lang=text style=color:#fdf4c1aa;background-color:#282828><code class=language-text data-lang=text><span>Authentication:
+</span><span>- /api/auth/register/
+</span><span>- /api/auth/login/
+</span><span>- /api/auth/logout/
+</span><span>- /api/auth/profile/
+</span><span>- /api/auth/validate-token/
+</span><span>
+</span><span>Vehicles:
+</span><span>- /api/vehicles/
+</span><span>- /api/vehicles/&LTid>/
+</span><span>
+</span><span>Maintenance:
+</span><span>- /api/maintenance/
+</span><span>- /api/maintenance/&LTid>/
+</span><span>
+</span><span>Drivers:
+</span><span>- /api/drivers/
+</span><span>- /api/drivers/&LTid>/
+</span><span>
+</span><span>AI Analysis:
+</span><span>- /api/screenshots/analyze/
+</span><span>- /api/screenshots/batch-analyze/
+</span><span>- /api/screenshots/generate-report/
+</span></code></pre><h2 id=test-patching-system>Test Patching System</h2><p>The project uses a complex patching system:<pre class=language-text data-lang=text style=color:#fdf4c1aa;background-color:#282828><code class=language-text data-lang=text><span>1. JWT Auth Patch: Modifies permission classes for tests
+</span><span>2. Test Setup: Configures environment in test_setup.py
+</span><span>3. Custom Test Runners: Multiple runners with different patches
+</span></code></pre><h2 id=known-issues>Known Issues</h2><pre class=language-text data-lang=text style=color:#fdf4c1aa;background-color:#282828><code class=language-text data-lang=text><span>1. Authentication Inconsistency: Mixed token/JWT usage
+</span><span>2. Missing API Endpoints: Some endpoints not implemented
+</span><span>3. Test Failures: Authentication-related failures persist
+</span><span>4. Date Calculations: Hardcoded dates in tests
+</span><span>5. Missing Test Files: Required images for OpenRouter tests
+</span><span>6. Inconsistent Permissions: Varying permission classes
+</span><span>7. Duplicate Code: Multiple similar patch implementations
+</span></code></pre><h2 id=next-steps-for-refactoring>Next Steps for Refactoring</h2><pre class=language-text data-lang=text style=color:#fdf4c1aa;background-color:#282828><code class=language-text data-lang=text><span>1. Standardize Authentication: Consolidate to JWT
+</span><span>2. Clean Up Test Patching: Unify patch implementations
+</span><span>3. Fix API Endpoints: Implement missing endpoints
+</span><span>4. Improve Test Coverage: Focus on views/API endpoints
+</span><span>5. Fix Date Calculations: Use dynamic date handling
+</span><span>6. Documentation: Enhance with drf-spectacular
+</span><span>7. Clean Up Dependencies: Verify requirements.txt
+</span><span>8. Refactor Permissions: Consistent permission strategy
+</span></code></pre><p class=tags-data><section id=comments style=margin-top:2em><script label="💬 comment" async crossorigin issue-term=pathname repo=JGITSol/jgitsol.github.io src=https://utteranc.es/client.js theme=preferred-color-scheme></script></section></main><footer><hr><div id=footer-container><div><p>Theme and color theme licensed under <a rel="noopener noreferrer" href=https://en.wikipedia.org/wiki/Licence_MIT target=_blank>MIT</a>.<br> Built with <a rel="noopener noreferrer" href=https://www.getzola.org target=_blank>Zola</a> using <a rel="noopener noreferrer" href=https://github.com/Speyll/anemone target=_blank>anemone</a> theme, <a rel="noopener noreferrer" href=https://speyll.github.io/suCSS/ target=_blank>suCSS</a> framework & <a rel="noopener noreferrer" href=https://github.com/Speyll/veqev target=_blank>veqev</a>.<br></div><div><a rel="noopener noreferrer" title="Subscribe via RSS for updates." class=no-style href=https://jgitsol.github.io/atom.xml target=_blank><svg class=icons><use href=https://jgitsol.github.io/icons.svg#rss></use></svg></a></div></div></footer>
