@@ -5,6 +5,7 @@ date = "2024-05-23"
 description = "Current state of the fleet management django project"
 tags = ["django", "fleet management", "portfolio"]
 +++
+
 # Current State of the Fleet Management Django Project
 
 ## Project Overview
@@ -15,130 +16,125 @@ The Car Fleet Management project is a Django-based web application designed to m
 
 The project is organized into the following main apps:
 
-1. **accounts**: User management and authentication
+```text
+1. accounts: User management and authentication
    - CustomUser model with role-based permissions
    - Driver management
    - Emergency contact information
 
-2. **vehicles**: Vehicle management and tracking
+2. vehicles: Vehicle management and tracking
    - Vehicle registration and details
    - Status tracking (available, in use, maintenance, out of service)
    - Assignment to drivers
 
-3. **maintenance**: Maintenance records and scheduling
+3. maintenance: Maintenance records and scheduling
    - Maintenance types (routine, repair, inspection)
    - Status tracking (scheduled, in progress, completed, cancelled)
    - Cost tracking and service provider information
 
-4. **emergency**: Emergency incident reporting and management
+4. emergency: Emergency incident reporting and management
    - Incident types (accident, breakdown, medical, theft)
    - Status tracking (reported, responding, resolved, closed)
    - Emergency response coordination
 
-5. **api**: REST API endpoints for the application
+5. api: REST API endpoints for the application
    - JWT authentication
    - Endpoints for all main entities
    - Mobile app integration via Lynx JS client
    - AI-powered screenshot analysis using OpenRouter
+```
 
 ## Current Test Coverage
 
 The project has improved test coverage from 17% to 56%, with:
+
+```text
 - Models have excellent coverage (nearly 100%)
 - Views and API functionality have improved significantly but still have gaps
 - Some tests are skipped or failing due to authentication and configuration issues
+```
 
 ## Authentication Issues
 
 The main issues causing test failures are related to authentication:
 
-1. **JWT Configuration**: The project uses djangorestframework-simplejwt for JWT authentication, but tests are using force_authenticate which doesn't properly set up JWT tokens.
-
-2. **Permission Classes**: API views use restrictive permission classes (IsAuthenticated, IsAdminUser) without proper test setup.
-
-3. **Test Authentication**: Test clients aren't properly configured to use JWT tokens.
-
-4. **Patch System**: A complex patch system has been implemented to fix authentication in tests, but it's not consistently applied across all tests.
+```text
+1. JWT Configuration: Uses djangorestframework-simplejwt but tests use force_authenticate
+2. Permission Classes: Restrictive permissions without proper test setup
+3. Test Authentication: Clients not configured for JWT tokens
+4. Patch System: Inconsistent application of authentication patches
+```
 
 ## Missing Dependencies
 
-Several dependencies were missing and causing test failures:
-
-1. djangorestframework-simplejwt for JWT authentication
-2. drf-spectacular for API schema generation and documentation
-3. REST framework test utilities (rest_framework.test.APITestCase)
-4. django-filter for REST Framework filtering capabilities
-
-These dependencies have been added to requirements.txt but some tests still fail due to import issues and assertion errors.
+```text
+1. djangorestframework-simplejwt
+2. drf-spectacular
+3. REST framework test utilities
+4. django-filter
+```
 
 ## API Endpoints
 
 The API provides endpoints for:
 
-1. **Authentication**:
-   - /api/auth/register/
-   - /api/auth/login/
-   - /api/auth/logout/
-   - /api/auth/profile/
-   - /api/auth/validate-token/
+```text
+Authentication:
+- /api/auth/register/
+- /api/auth/login/
+- /api/auth/logout/
+- /api/auth/profile/
+- /api/auth/validate-token/
 
-2. **Vehicles**:
-   - /api/vehicles/
-   - /api/vehicles/<id>/
+Vehicles:
+- /api/vehicles/
+- /api/vehicles/<id>/
 
-3. **Maintenance**:
-   - /api/maintenance/
-   - /api/maintenance/<id>/
+Maintenance:
+- /api/maintenance/
+- /api/maintenance/<id>/
 
-4. **Drivers**:
-   - /api/drivers/
-   - /api/drivers/<id>/
+Drivers:
+- /api/drivers/
+- /api/drivers/<id>/
 
-5. **AI Analysis** (using OpenRouter):
-   - /api/screenshots/analyze/
-   - /api/screenshots/batch-analyze/
-   - /api/screenshots/generate-report/
+AI Analysis:
+- /api/screenshots/analyze/
+- /api/screenshots/batch-analyze/
+- /api/screenshots/generate-report/
+```
 
 ## Test Patching System
 
-The project uses a complex patching system to fix authentication issues in tests:
+The project uses a complex patching system:
 
-1. **JWT Auth Patch**: Modifies permission classes to be less restrictive during tests and provides utilities to authenticate test clients with JWT tokens.
-
-2. **Test Setup**: The test_setup.py file configures the test environment and patches serializers and authentication.
-
-3. **Custom Test Runners**: Multiple test runners (run_tests.py, run_patched_tests.py) apply different patches to make tests pass.
+```text
+1. JWT Auth Patch: Modifies permission classes for tests
+2. Test Setup: Configures environment in test_setup.py
+3. Custom Test Runners: Multiple runners with different patches
+```
 
 ## Known Issues
 
-1. **Authentication Inconsistency**: The project uses both token-based authentication and JWT authentication, leading to confusion in tests.
-
-2. **Missing API Endpoints**: Some API endpoints referenced in tests don't actually exist in the project (e.g., vehicle-list, vehicle-detail).
-
-3. **Test Failures**: Some tests fail due to authentication issues, even with the patching system.
-
-4. **Date Calculation Issues**: Some tests use hardcoded dates instead of dynamic calculations, causing failures over time.
-
-5. **Missing Test Files**: Tests for OpenRouter client functionality require test image files that may not be present.
-
-6. **Inconsistent Permissions**: API views use different permission classes without a clear pattern.
-
-7. **Duplicate Code**: There are multiple patch implementations doing similar things (jwt_auth_patch.py, patch_auth_tests.py, auth_test_patch.py).
+```text
+1. Authentication Inconsistency: Mixed token/JWT usage
+2. Missing API Endpoints: Some endpoints not implemented
+3. Test Failures: Authentication-related failures persist
+4. Date Calculations: Hardcoded dates in tests
+5. Missing Test Files: Required images for OpenRouter tests
+6. Inconsistent Permissions: Varying permission classes
+7. Duplicate Code: Multiple similar patch implementations
+```
 
 ## Next Steps for Refactoring
 
-1. **Standardize Authentication**: Choose one authentication method (JWT recommended) and use it consistently throughout the project.
-
-2. **Clean Up Test Patching**: Consolidate the multiple patch implementations into a single, well-documented approach.
-
-3. **Fix API Endpoint Inconsistencies**: Ensure all referenced endpoints actually exist and follow REST conventions.
-
-4. **Improve Test Coverage**: Focus on increasing coverage for views and API endpoints.
-
-5. **Fix Date Calculations**: Replace hardcoded dates with dynamic calculations in tests.
-
-6. **Documentation**: Improve API documentation using drf-spectacular.
-
-7. **Clean Up Dependencies**: Ensure all required dependencies are properly listed in requirements.txt.
-
-8. **Refactor Permission Classes**: Implement a consistent permission strategy across all API views.
+```text
+1. Standardize Authentication: Consolidate to JWT
+2. Clean Up Test Patching: Unify patch implementations
+3. Fix API Endpoints: Implement missing endpoints
+4. Improve Test Coverage: Focus on views/API endpoints
+5. Fix Date Calculations: Use dynamic date handling
+6. Documentation: Enhance with drf-spectacular
+7. Clean Up Dependencies: Verify requirements.txt
+8. Refactor Permissions: Consistent permission strategy
+```
