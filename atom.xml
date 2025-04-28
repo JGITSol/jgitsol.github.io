@@ -5,8 +5,128 @@
     <link rel="self" type="application/atom+xml" href="https://jgitsol.github.io/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://jgitsol.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2024-05-22T00:00:00+00:00</updated>
+    <updated>2024-05-23T00:00:00+00:00</updated>
     <id>https://jgitsol.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Portfolio projects- part 1 - Django Fleet Management System</title>
+        <published>2024-05-23T00:00:00+00:00</published>
+        <updated>2024-05-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://jgitsol.github.io/blog/portfolio-projects-part1/"/>
+        <id>https://jgitsol.github.io/blog/portfolio-projects-part1/</id>
+        
+        <content type="html" xml:base="https://jgitsol.github.io/blog/portfolio-projects-part1/">&lt;h1 id=&quot;current-state-of-the-fleet-management-django-project&quot;&gt;Current State of the Fleet Management Django Project&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;project-overview&quot;&gt;Project Overview&lt;&#x2F;h2&gt;
+&lt;p&gt;The Car Fleet Management project is a Django-based web application designed to manage vehicle fleets, maintenance schedules, drivers, and emergency incidents. The project uses Django REST Framework for API endpoints and JWT authentication for secure access.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;project-structure&quot;&gt;Project Structure&lt;&#x2F;h2&gt;
+&lt;p&gt;The project is organized into the following main apps:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;1. accounts: User management and authentication
+&lt;&#x2F;span&gt;&lt;span&gt;   - CustomUser model with role-based permissions
+&lt;&#x2F;span&gt;&lt;span&gt;   - Driver management
+&lt;&#x2F;span&gt;&lt;span&gt;   - Emergency contact information
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;2. vehicles: Vehicle management and tracking
+&lt;&#x2F;span&gt;&lt;span&gt;   - Vehicle registration and details
+&lt;&#x2F;span&gt;&lt;span&gt;   - Status tracking (available, in use, maintenance, out of service)
+&lt;&#x2F;span&gt;&lt;span&gt;   - Assignment to drivers
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;3. maintenance: Maintenance records and scheduling
+&lt;&#x2F;span&gt;&lt;span&gt;   - Maintenance types (routine, repair, inspection)
+&lt;&#x2F;span&gt;&lt;span&gt;   - Status tracking (scheduled, in progress, completed, cancelled)
+&lt;&#x2F;span&gt;&lt;span&gt;   - Cost tracking and service provider information
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;4. emergency: Emergency incident reporting and management
+&lt;&#x2F;span&gt;&lt;span&gt;   - Incident types (accident, breakdown, medical, theft)
+&lt;&#x2F;span&gt;&lt;span&gt;   - Status tracking (reported, responding, resolved, closed)
+&lt;&#x2F;span&gt;&lt;span&gt;   - Emergency response coordination
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;5. api: REST API endpoints for the application
+&lt;&#x2F;span&gt;&lt;span&gt;   - JWT authentication
+&lt;&#x2F;span&gt;&lt;span&gt;   - Endpoints for all main entities
+&lt;&#x2F;span&gt;&lt;span&gt;   - Mobile app integration via Lynx JS client
+&lt;&#x2F;span&gt;&lt;span&gt;   - AI-powered screenshot analysis using OpenRouter
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;current-test-coverage&quot;&gt;Current Test Coverage&lt;&#x2F;h2&gt;
+&lt;p&gt;The project has improved test coverage from 17% to 56%, with:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;- Models have excellent coverage (nearly 100%)
+&lt;&#x2F;span&gt;&lt;span&gt;- Views and API functionality have improved significantly but still have gaps
+&lt;&#x2F;span&gt;&lt;span&gt;- Some tests are skipped or failing due to authentication and configuration issues
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;authentication-issues&quot;&gt;Authentication Issues&lt;&#x2F;h2&gt;
+&lt;p&gt;The main issues causing test failures are related to authentication:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;1. JWT Configuration: Uses djangorestframework-simplejwt but tests use force_authenticate
+&lt;&#x2F;span&gt;&lt;span&gt;2. Permission Classes: Restrictive permissions without proper test setup
+&lt;&#x2F;span&gt;&lt;span&gt;3. Test Authentication: Clients not configured for JWT tokens
+&lt;&#x2F;span&gt;&lt;span&gt;4. Patch System: Inconsistent application of authentication patches
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;missing-dependencies&quot;&gt;Missing Dependencies&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;1. djangorestframework-simplejwt
+&lt;&#x2F;span&gt;&lt;span&gt;2. drf-spectacular
+&lt;&#x2F;span&gt;&lt;span&gt;3. REST framework test utilities
+&lt;&#x2F;span&gt;&lt;span&gt;4. django-filter
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;api-endpoints&quot;&gt;API Endpoints&lt;&#x2F;h2&gt;
+&lt;p&gt;The API provides endpoints for:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;Authentication:
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;auth&#x2F;register&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;auth&#x2F;login&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;auth&#x2F;logout&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;auth&#x2F;profile&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;auth&#x2F;validate-token&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Vehicles:
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;vehicles&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;vehicles&#x2F;&amp;lt;id&amp;gt;&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Maintenance:
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;maintenance&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;maintenance&#x2F;&amp;lt;id&amp;gt;&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Drivers:
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;drivers&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;drivers&#x2F;&amp;lt;id&amp;gt;&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;AI Analysis:
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;screenshots&#x2F;analyze&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;screenshots&#x2F;batch-analyze&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;- &#x2F;api&#x2F;screenshots&#x2F;generate-report&#x2F;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;test-patching-system&quot;&gt;Test Patching System&lt;&#x2F;h2&gt;
+&lt;p&gt;The project uses a complex patching system:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;1. JWT Auth Patch: Modifies permission classes for tests
+&lt;&#x2F;span&gt;&lt;span&gt;2. Test Setup: Configures environment in test_setup.py
+&lt;&#x2F;span&gt;&lt;span&gt;3. Custom Test Runners: Multiple runners with different patches
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;known-issues&quot;&gt;Known Issues&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;1. Authentication Inconsistency: Mixed token&#x2F;JWT usage
+&lt;&#x2F;span&gt;&lt;span&gt;2. Missing API Endpoints: Some endpoints not implemented
+&lt;&#x2F;span&gt;&lt;span&gt;3. Test Failures: Authentication-related failures persist
+&lt;&#x2F;span&gt;&lt;span&gt;4. Date Calculations: Hardcoded dates in tests
+&lt;&#x2F;span&gt;&lt;span&gt;5. Missing Test Files: Required images for OpenRouter tests
+&lt;&#x2F;span&gt;&lt;span&gt;6. Inconsistent Permissions: Varying permission classes
+&lt;&#x2F;span&gt;&lt;span&gt;7. Duplicate Code: Multiple similar patch implementations
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;next-steps-for-refactoring&quot;&gt;Next Steps for Refactoring&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;1. Standardize Authentication: Consolidate to JWT
+&lt;&#x2F;span&gt;&lt;span&gt;2. Clean Up Test Patching: Unify patch implementations
+&lt;&#x2F;span&gt;&lt;span&gt;3. Fix API Endpoints: Implement missing endpoints
+&lt;&#x2F;span&gt;&lt;span&gt;4. Improve Test Coverage: Focus on views&#x2F;API endpoints
+&lt;&#x2F;span&gt;&lt;span&gt;5. Fix Date Calculations: Use dynamic date handling
+&lt;&#x2F;span&gt;&lt;span&gt;6. Documentation: Enhance with drf-spectacular
+&lt;&#x2F;span&gt;&lt;span&gt;7. Clean Up Dependencies: Verify requirements.txt
+&lt;&#x2F;span&gt;&lt;span&gt;8. Refactor Permissions: Consistent permission strategy
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
     <entry xml:lang="en">
         <title>Retro Games - part 1 - Asteroid Game</title>
         <published>2024-05-22T00:00:00+00:00</published>
@@ -554,16 +674,34 @@ Finally, build and serve your Zola site to see the game in action:&lt;&#x2F;p&gt
         <link rel="alternate" type="text/html" href="https://jgitsol.github.io/projects/"/>
         <id>https://jgitsol.github.io/projects/</id>
         
-        <content type="html" xml:base="https://jgitsol.github.io/projects/">&lt;h4 id=&quot;main-webpage&quot;&gt;MAIN WEBPAGE&lt;&#x2F;h4&gt;
-&lt;p&gt;https:&#x2F;&#x2F;jedrzejgrabala.site&lt;&#x2F;p&gt;
-&lt;h4 id=&quot;client-portal&quot;&gt;CLIENT PORTAL&lt;&#x2F;h4&gt;
-&lt;pre style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&lt;code&gt;&lt;span&gt; + Wagtai&#x2F;Django 
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;h4 id=&quot;retro-games&quot;&gt;RETRO GAMES&lt;&#x2F;h4&gt;
-&lt;pre style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&lt;code&gt;&lt;span&gt;+ Asteroid, Snake, Pac-Man
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;h4 id=&quot;huggingface-zero-spaces&quot;&gt;HUGGINGFACE ZERO SPACES&lt;&#x2F;h4&gt;
-&lt;pre style=&quot;background-color:#282828;color:#fdf4c1aa;&quot;&gt;&lt;code&gt;&lt;span&gt;+ Polish Criminal Law testspace&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+        <content type="html" xml:base="https://jgitsol.github.io/projects/">&lt;h2 id=&quot;experimental-projects-pre-release&quot;&gt;Experimental Projects (Pre-release)&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;fleet-management-system&quot;&gt;Fleet Management System&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;JGITSol&#x2F;fleet_mgmt_django&quot;&gt;GitHub Repository&lt;&#x2F;a&gt; | Tags: #Python #Django #Database #Management&lt;&#x2F;p&gt;
+&lt;p&gt;A comprehensive fleet management solution with:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Vehicle &amp;amp; driver management&lt;&#x2F;li&gt;
+&lt;li&gt;Maintenance tracking&lt;&#x2F;li&gt;
+&lt;li&gt;Fuel consumption logging&lt;&#x2F;li&gt;
+&lt;li&gt;Analytics dashboard&lt;&#x2F;li&gt;
+&lt;li&gt;Role-based access control&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;released-projects&quot;&gt;Released Projects&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;ira-showcase&quot;&gt;IRA_showcase&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;JGITSol&#x2F;IRA_showcase&quot;&gt;GitHub Repository&lt;&#x2F;a&gt; | Tags: #Python #MachineLearning #Streamlit #Insurance #RiskPrediction&lt;&#x2F;p&gt;
+&lt;p&gt;Insurance Risk Prediction Application&lt;&#x2F;p&gt;
+&lt;p&gt;This application predicts insurance charges and assesses risk factors based on demographic and health information. It uses machine learning to provide accurate predictions and visualizations to help understand risk factors.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Features:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Predict insurance charges based on personal information&lt;&#x2F;li&gt;
+&lt;li&gt;Calculate risk scores to assess insurance risk&lt;&#x2F;li&gt;
+&lt;li&gt;Store and retrieve prediction history&lt;&#x2F;li&gt;
+&lt;li&gt;Visualize risk factors and prediction comparisons&lt;&#x2F;li&gt;
+&lt;li&gt;Explore model insights and feature importance&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Built with Streamlit (web interface), scikit-learn (ML), and Matplotlib&#x2F;Seaborn (visualizations).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;other-projects&quot;&gt;Other Projects&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;main-website&quot;&gt;Main Website&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;jgitsolutions.space&quot;&gt;https:&#x2F;&#x2F;jgitsolutions.space&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 </content>
         
     </entry>
