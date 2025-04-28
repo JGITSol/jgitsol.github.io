@@ -3,17 +3,12 @@ title = "Jedrzej Grabala's personal website"
 description = "Welcome to my personal webpage, where you can learn more about me"
 compile_sass = false
 minify_html = true
-generate_feed = true
+generate_feeds = true
 default_language = "en"
 
 taxonomies = [
     {name = "tags", feed = true},
 ]
-
-[languages.fr]
-weight = 2
-languageName = "Français"
-languageCode = "fr"
 
 [markdown]
 render_emoji = true

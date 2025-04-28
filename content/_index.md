@@ -1,7 +1,5 @@
 +++
 title = "Welcome Post"
-[taxonomies]
-  tags = ["social"]
 [extra]
   toc = false
 +++
